@@ -1,0 +1,26 @@
+<template x-if="accessToken">
+  <div class="chat-component">
+    <div class="chat-header">
+      <h2 class="chat-title" x-text="roomId ? getRoomName(roomId) : 'Select a room'"></h2>
+      <div class="join-room">
+        <input x-model="joinRoomId" placeholder="Room ID to join" class="join-input">
+        <button @click="joinRoom()" class="join-button">Join Room</button>
+      </div>
+    </div>
+    
+    <div class="messages-container">
+      <template x-for="message in messages" :key="message.id">
+        <div class="message">
+          <div class="message-sender" x-text="message.sender"></div>
+          <div class="message-body" x-text="message.body"></div>
+          <div class="message-time" x-text="new Date(message.timestamp).toLocaleTimeString()"></div>
+        </div>
+      </template>
+    </div>
+    
+    <div class="message-input-container">
+      <textarea x-model="newMessage" placeholder="Type your message..." class="message-textarea"></textarea>
+      <button @click="sendMessage()" class="send-button">Send</button>
+    </div>
+  </div>
+</template>
